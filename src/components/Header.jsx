@@ -21,7 +21,7 @@ export default function Header() {
         {onProduct && <span> / {crumb}</span>}
       </nav>
 
-      <span className={styles.cart} aria-label="Cart items">
+      <span className={styles.cart} aria-label={`${count} items in cart`}>
         🛒 {count}
       </span>
     </header>
