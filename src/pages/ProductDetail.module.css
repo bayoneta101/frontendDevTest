@@ -31,14 +31,34 @@
   align-items: flex-start;
 }
 
-.image {
+.imageWrap {
+  position: relative;
   width: 100%;
   max-width: 360px;
+}
+
+.image {
+  display: block;
+  width: 100%;
   object-fit: contain;
   background: #fafafa;
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 1rem;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+  color: #b00020;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 8px;
 }
 
 .infoCol {

@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useCart } from '../context/CartContext.jsx'
+import { isAvailable } from '../utils/product.js'
 import styles from './Actions.module.css'
 
 export default function Actions({ product }) {
   const colors = product.options?.colors ?? []
   const storages = product.options?.storages ?? []
+  const available = isAvailable(product)
   const { addItem } = useCart()
 
   // El primer valor queda seleccionado por defecto (también con una sola opción).
@@ -13,6 +15,7 @@ export default function Actions({ product }) {
   const [status, setStatus] = useState('idle') // idle | adding | done | error
 
   async function handleAdd() {
+    if (!available) return
     setStatus('adding')
     try {
       const color = colors.find((c) => c.code === colorCode)
@@ -54,8 +57,16 @@ export default function Actions({ product }) {
         </select>
       </label>
 
-      <button type="button" onClick={handleAdd} disabled={status === 'adding'}>
-        {status === 'adding' ? 'Adding…' : 'Add to cart'}
+      <button
+        type="button"
+        onClick={handleAdd}
+        disabled={!available || status === 'adding'}
+      >
+        {!available
+          ? 'Not available'
+          : status === 'adding'
+            ? 'Adding…'
+            : 'Add to cart'}
       </button>
 
       {status === 'done' && (

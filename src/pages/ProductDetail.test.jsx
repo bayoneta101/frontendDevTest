@@ -55,6 +55,7 @@ function renderPDP() {
 
 describe('ProductDetail', () => {
   beforeEach(() => {
+    vi.clearAllMocks()
     localStorage.clear()
     getProduct.mockResolvedValue(PRODUCT)
     // La API real devuelve siempre { count: 1 } por petición.
@@ -82,5 +83,20 @@ describe('ProductDetail', () => {
     // Segundo añadido → el contador acumula, no se queda en 1.
     await userEvent.click(addButton)
     expect(await screen.findByText('🛒 2')).toBeInTheDocument()
+  })
+
+  it('sin precio: marca el producto como no disponible y no deja añadir', async () => {
+    getProduct.mockResolvedValue({ ...PRODUCT, price: '' })
+    renderPDP()
+
+    await screen.findByRole('heading', { name: /acer iconia/i })
+
+    const addButton = screen.getByRole('button', { name: /not available/i })
+    expect(addButton).toBeDisabled()
+    // "Not available" aparece en el overlay de la imagen y en el botón.
+    expect(screen.getAllByText('Not available')).toHaveLength(2)
+
+    await userEvent.click(addButton)
+    expect(addToCart).not.toHaveBeenCalled()
   })
 })

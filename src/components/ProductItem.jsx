@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { isAvailable } from '../utils/product.js'
 import styles from './ProductItem.module.css'
 
 export default function ProductItem({ product }) {
@@ -6,12 +7,17 @@ export default function ProductItem({ product }) {
   return (
     <li className={styles.card}>
       <Link to={`/product/${id}`} className={styles.link}>
-        <img
-          className={styles.image}
-          src={imgUrl}
-          alt={`${brand} ${model}`}
-          loading="lazy"
-        />
+        <div className={styles.imageWrap}>
+          <img
+            className={styles.image}
+            src={imgUrl}
+            alt={`${brand} ${model}`}
+            loading="lazy"
+          />
+          {!isAvailable(product) && (
+            <span className={styles.overlay}>Not available</span>
+          )}
+        </div>
         <div className={styles.info}>
           <span className={styles.brand}>{brand}</span>
           <span className={styles.model}>{model}</span>

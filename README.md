@@ -44,6 +44,8 @@ npm install
 - **Vista de carrito (`/cart`):** lista de los artículos añadidos (imagen,
   modelo, opciones y precio), precio total y botón para borrar cada línea. El
   contador de la cabecera enlaza a esta vista.
+- **Producto sin precio:** si la API no trae precio, la imagen muestra un overlay
+  «Not available» (en listado y detalle) y el botón de añadir queda deshabilitado.
 
 ## Decisiones técnicas
 

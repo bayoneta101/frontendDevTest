@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getProduct } from '../api/client.js'
 import { useBreadcrumb } from '../context/BreadcrumbContext.jsx'
+import { isAvailable } from '../utils/product.js'
 import Description from '../components/Description.jsx'
 import Actions from '../components/Actions.jsx'
 import styles from './ProductDetail.module.css'
@@ -48,12 +49,16 @@ export default function ProductDetail() {
 
       <div className={styles.columns}>
         <div className={styles.imageCol}>
-          {/* ponytail: <img> inline; un componente de una etiqueta no se paga */}
-          <img
-            className={styles.image}
-            src={product.imgUrl}
-            alt={`${product.brand} ${product.model}`}
-          />
+          <div className={styles.imageWrap}>
+            <img
+              className={styles.image}
+              src={product.imgUrl}
+              alt={`${product.brand} ${product.model}`}
+            />
+            {!isAvailable(product) && (
+              <span className={styles.overlay}>Not available</span>
+            )}
+          </div>
         </div>
 
         <div className={styles.infoCol}>
