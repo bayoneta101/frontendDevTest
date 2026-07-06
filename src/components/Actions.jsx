@@ -15,7 +15,9 @@ export default function Actions({ product }) {
   async function handleAdd() {
     setStatus('adding')
     try {
-      await addItem({ id: product.id, colorCode, storageCode })
+      const color = colors.find((c) => c.code === colorCode)
+      const storage = storages.find((s) => s.code === storageCode)
+      await addItem({ product, color, storage })
       setStatus('done')
     } catch {
       setStatus('error')

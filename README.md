@@ -39,6 +39,12 @@ npm install
 - **Cache de 1 hora:** las respuestas de la API se guardan en `localStorage`; se
   revalidan al expirar.
 
+## Funcionalidades más allá del enunciado
+
+- **Vista de carrito (`/cart`):** lista de los artículos añadidos (imagen,
+  modelo, opciones y precio), precio total y botón para borrar cada línea. El
+  contador de la cabecera enlaza a esta vista.
+
 ## Decisiones técnicas
 
 - **React + Vite:** SPA con `start`/`build`/`test`/`lint` de serie.
@@ -53,7 +59,7 @@ npm install
 ## Notas
 
 - La API de añadir al carrito es _stateless_ y responde siempre `{ count: 1 }`,
-  por lo que el total del carrito se acumula en cliente a partir de ese valor.
+  no el total real de la cesta.
 - La API tiene erratas en algunas claves (`dimentions`, `secondaryCmera`); se
   mapean tal cual en la descripción del producto.
 - Node 25 expone un `localStorage` global inerte que tapa el de jsdom; en el
@@ -66,3 +72,4 @@ npm install
 - Enrutado y layout: la cabecera se muestra en ambas vistas.
 - PLP: el filtro reduce la lista según el texto.
 - PDP: opción única preseleccionada y el contador acumula en cada añadido.
+- Carrito: lista los items, muestra el total y permite borrar cada línea.

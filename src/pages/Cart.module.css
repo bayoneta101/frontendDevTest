@@ -1,0 +1,111 @@
+.page {
+  padding: 1.5rem;
+}
+
+.title {
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+}
+
+.empty {
+  color: #666;
+  margin: 0 0 1rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.opts {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.price {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.remove {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #b00020;
+  cursor: pointer;
+}
+
+.remove:hover {
+  background: #fbe9ec;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-top: 2px solid #111;
+  margin-bottom: 1.5rem;
+}
+
+.totalLabel {
+  font-weight: 600;
+}
+
+.totalValue {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.back {
+  color: inherit;
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .row {
+    grid-template-columns: 56px 1fr auto;
+    row-gap: 0.5rem;
+  }
+
+  /* La imagen ocupa la primera columna; la acción cae debajo del precio. */
+  .remove {
+    grid-column: 2 / 4;
+    justify-self: end;
+  }
+}

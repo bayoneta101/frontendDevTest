@@ -4,6 +4,7 @@ import { BreadcrumbProvider } from './context/BreadcrumbContext.jsx'
 import Layout from './components/Layout.jsx'
 import ProductList from './pages/ProductList.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
+import Cart from './pages/Cart.jsx'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<ProductList />} />
               <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<Cart />} />
             </Route>
           </Routes>
         </BrowserRouter>

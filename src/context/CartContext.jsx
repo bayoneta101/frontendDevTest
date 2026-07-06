@@ -4,35 +4,68 @@ import {
   useState,
   useEffect,
   useCallback,
+  useMemo,
 } from 'react'
 import { addToCart } from '../api/client.js'
 
 const CartContext = createContext(null)
-const STORAGE_KEY = 'cart:count'
+const STORAGE_KEY = 'cart:items'
+
+function loadItems() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
 
 export function CartProvider({ children }) {
-  const [count, setCount] = useState(() => {
-    const saved = Number(localStorage.getItem(STORAGE_KEY))
-    return Number.isFinite(saved) ? saved : 0
-  })
+  const [items, setItems] = useState(loadItems)
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, String(count))
-  }, [count])
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+  }, [items])
 
-  // La API de test es stateless y devuelve siempre { count: 1 } (los añadidos
-  // de esta petición), no el total. Acumulamos en cliente para el contador.
-  const addItem = useCallback(async (selection) => {
-    const { count: added } = await addToCart(selection)
-    setCount((prev) => prev + added)
-    return added
+  // Registra el añadido en la API (contrato del enunciado) y guarda la línea
+  // en cliente para poder listarla y borrarla.
+  const addItem = useCallback(async ({ product, color, storage }) => {
+    await addToCart({
+      id: product.id,
+      colorCode: color?.code,
+      storageCode: storage?.code,
+    })
+    setItems((prev) => [
+      ...prev,
+      {
+        lineId: crypto.randomUUID(),
+        id: product.id,
+        brand: product.brand,
+        model: product.model,
+        price: Number(product.price) || 0,
+        imgUrl: product.imgUrl,
+        colorName: color?.name,
+        storageName: storage?.name,
+      },
+    ])
   }, [])
 
-  return (
-    <CartContext.Provider value={{ count, addItem }}>
-      {children}
-    </CartContext.Provider>
+  const removeItem = useCallback((lineId) => {
+    setItems((prev) => prev.filter((it) => it.lineId !== lineId))
+  }, [])
+
+  const value = useMemo(
+    () => ({
+      items,
+      count: items.length,
+      total: items.reduce((sum, it) => sum + it.price, 0),
+      addItem,
+      removeItem,
+    }),
+    [items, addItem, removeItem],
   )
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
