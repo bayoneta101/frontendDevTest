@@ -8,6 +8,12 @@ import ProductDetail from './pages/ProductDetail.jsx'
 
 vi.mock('./api/client.js', () => ({
   getProducts: vi.fn().mockResolvedValue([]),
+  getProduct: vi.fn().mockResolvedValue({
+    id: 'abc123',
+    brand: 'Acer',
+    model: 'Iconia',
+    options: { colors: [], storages: [] },
+  }),
   addToCart: vi.fn(),
 }))
 
@@ -37,13 +43,13 @@ describe('enrutado + layout', () => {
     ).toBeInTheDocument()
   })
 
-  it('muestra header y PDP en /product/:id', () => {
+  it('muestra header y PDP en /product/:id', async () => {
     renderAt('/product/abc123')
     expect(
       screen.getByRole('link', { name: /mobile shop/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /product abc123/i }),
+      await screen.findByRole('heading', { name: /acer iconia/i }),
     ).toBeInTheDocument()
   })
 })

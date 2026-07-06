@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import { addToCart } from '../api/client.js'
 
 const CartContext = createContext(null)
@@ -10,12 +16,16 @@ export function CartProvider({ children }) {
     return Number.isFinite(saved) ? saved : 0
   })
 
-  // Añade al carrito vía API; la respuesta ({ count }) es la fuente de verdad.
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, String(count))
+  }, [count])
+
+  // La API de test es stateless y devuelve siempre { count: 1 } (los añadidos
+  // de esta petición), no el total. Acumulamos en cliente para el contador.
   const addItem = useCallback(async (selection) => {
-    const { count: newCount } = await addToCart(selection)
-    setCount(newCount)
-    localStorage.setItem(STORAGE_KEY, String(newCount))
-    return newCount
+    const { count: added } = await addToCart(selection)
+    setCount((prev) => prev + added)
+    return added
   }, [])
 
   return (
