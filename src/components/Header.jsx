@@ -13,12 +13,12 @@ export default function Header() {
         Mobile Shop
       </Link>
 
-      <nav aria-label="Migas de pan" className={styles.breadcrumbs}>
-        <Link to="/">Inicio</Link>
+      <nav aria-label="Breadcrumbs" className={styles.breadcrumbs}>
+        <Link to="/">Home</Link>
         {onProduct && <span> / {pathname.split('/').pop()}</span>}
       </nav>
 
-      <span className={styles.cart} aria-label="Artículos en el carrito">
+      <span className={styles.cart} aria-label="Cart items">
         🛒 {count}
       </span>
     </header>

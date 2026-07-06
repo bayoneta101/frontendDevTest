@@ -1,10 +1,15 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext.jsx'
 import Layout from './components/Layout.jsx'
 import ProductList from './pages/ProductList.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
+
+vi.mock('./api/client.js', () => ({
+  getProducts: vi.fn().mockResolvedValue([]),
+  addToCart: vi.fn(),
+}))
 
 function renderAt(path) {
   return render(
@@ -22,13 +27,13 @@ function renderAt(path) {
 }
 
 describe('enrutado + layout', () => {
-  it('muestra header y PLP en /', () => {
+  it('muestra header y PLP en /', async () => {
     renderAt('/')
     expect(
       screen.getByRole('link', { name: /mobile shop/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /productos/i }),
+      await screen.findByRole('heading', { name: /products/i }),
     ).toBeInTheDocument()
   })
 
@@ -38,7 +43,7 @@ describe('enrutado + layout', () => {
       screen.getByRole('link', { name: /mobile shop/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /producto abc123/i }),
+      screen.getByRole('heading', { name: /product abc123/i }),
     ).toBeInTheDocument()
   })
 })

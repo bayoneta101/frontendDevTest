@@ -1,0 +1,49 @@
+.card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: #fafafa;
+  padding: 1rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.75rem;
+}
+
+.brand {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.model {
+  font-weight: 600;
+}
+
+.price {
+  margin-top: 0.25rem;
+  font-weight: 700;
+}
