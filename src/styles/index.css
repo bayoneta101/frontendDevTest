@@ -1,6 +1,38 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
+
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #fafafa;
+  --text: #1a1a1a;
+  --muted: #666666;
+  --subtle: #888888;
+  --border: #e2e2e2;
+  --border-soft: #f0f0f0;
+  --btn-bg: #111111;
+  --btn-text: #ffffff;
+  --danger: #b00020;
+  --danger-bg: #fbe9ec;
+  --overlay-bg: rgba(255, 255, 255, 0.72);
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --text: #eaeaea;
+  --muted: #a8a8a8;
+  --subtle: #9a9a9a;
+  --border: #333333;
+  --border-soft: #2a2a2a;
+  --btn-bg: #eaeaea;
+  --btn-text: #121212;
+  --danger: #ff6b6b;
+  --danger-bg: #3a1c22;
+  --overlay-bg: rgba(18, 18, 18, 0.72);
+  --shadow: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -10,8 +42,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #fff;
-  color: #1a1a1a;
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* El contenido no se estira sin límite en pantallas anchas. */

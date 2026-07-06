@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext.jsx'
 import { useBreadcrumb } from '../context/BreadcrumbContext.jsx'
+import SettingsMenu from './SettingsMenu.jsx'
 import styles from './Header.module.css'
 
 export default function Header() {
@@ -20,13 +21,16 @@ export default function Header() {
         {onProduct && label && <span> / {label}</span>}
       </nav>
 
-      <Link
-        to="/cart"
-        className={styles.cart}
-        aria-label={`${count} items in cart`}
-      >
-        🛒 {count}
-      </Link>
+      <div className={styles.actions}>
+        <SettingsMenu />
+        <Link
+          to="/cart"
+          className={styles.cart}
+          aria-label={`${count} items in cart`}
+        >
+          🛒 {count}
+        </Link>
+      </div>
     </header>
   )
 }

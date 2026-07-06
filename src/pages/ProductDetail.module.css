@@ -41,8 +41,8 @@
   display: block;
   width: 100%;
   object-fit: contain;
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -53,8 +53,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.72);
-  color: #b00020;
+  background: var(--overlay-bg);
+  color: var(--danger);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -72,5 +72,5 @@
 
 .state {
   padding: 2rem 1.5rem;
-  color: #666;
+  color: var(--muted);
 }

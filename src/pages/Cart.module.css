@@ -8,7 +8,7 @@
 }
 
 .empty {
-  color: #666;
+  color: var(--muted);
   margin: 0 0 1rem;
 }
 
@@ -24,15 +24,15 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border);
 }
 
 .thumb {
   width: 64px;
   height: 64px;
   object-fit: contain;
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
 }
 
@@ -48,7 +48,7 @@
 
 .opts {
   font-size: 0.85rem;
-  color: #888;
+  color: var(--subtle);
 }
 
 .price {
@@ -59,15 +59,15 @@
 .remove {
   padding: 0.4rem 0.75rem;
   font-size: 0.85rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  background: #fff;
-  color: #b00020;
+  background: var(--bg);
+  color: var(--danger);
   cursor: pointer;
 }
 
 .remove:hover {
-  background: #fbe9ec;
+  background: var(--danger-bg);
 }
 
 .footer {
@@ -75,7 +75,7 @@
   justify-content: space-between;
   align-items: baseline;
   padding: 0.75rem 0;
-  border-top: 2px solid #111;
+  border-top: 2px solid var(--text);
   margin-bottom: 1.5rem;
 }
 

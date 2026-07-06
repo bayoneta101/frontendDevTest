@@ -46,6 +46,8 @@ npm install
   contador de la cabecera enlaza a esta vista.
 - **Producto sin precio:** si la API no trae precio, la imagen muestra un overlay
   «Not available» (en listado y detalle) y el botón de añadir queda deshabilitado.
+- **Ajustes (⚙️):** menú en la cabecera con un switch de modo oscuro; el tema se
+  aplica a toda la web (variables CSS) y se recuerda entre recargas.
 
 ## Decisiones técnicas
 

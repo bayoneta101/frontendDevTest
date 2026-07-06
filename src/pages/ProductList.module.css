@@ -36,5 +36,5 @@
 
 .state {
   padding: 2rem 1.5rem;
-  color: #666;
+  color: var(--muted);
 }
