@@ -8,7 +8,6 @@ export default function Header() {
   const { label } = useBreadcrumb()
   const { pathname } = useLocation()
   const onProduct = pathname.startsWith('/product/')
-  const crumb = label ?? pathname.split('/').pop()
 
   return (
     <header className={styles.header}>
@@ -18,7 +17,7 @@ export default function Header() {
 
       <nav aria-label="Breadcrumbs" className={styles.breadcrumbs}>
         <Link to="/">Home</Link>
-        {onProduct && <span> / {crumb}</span>}
+        {onProduct && label && <span> / {label}</span>}
       </nav>
 
       <Link
